@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DbUtil {
-    private final String dbUrl = "jdbc:mysql://1.15.89.85:3306/ca";
+    private final String dbUrl = "jdbc:mysql://192.168.3.234:3306/ca";
     private final String dbUserName = "root";
-    private final String dbPassword = "J20001216";
+    private final String dbPassword = "";
     private final String jdbcName = "com.mysql.jdbc.Driver";
 
     /**
