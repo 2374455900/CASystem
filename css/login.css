@@ -1,0 +1,85 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    background:url(../layout/image/login_regist/02.jpg) ;
+}
+/* 整体盒子设置 */
+.box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50% );
+    width: 400px;
+    padding: 20px 10px;
+    background: rgba(0,0,0,.2);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.5);
+    border-radius: 10px;
+    }
+.box h2
+{
+    margin:0 0 10px;
+    color: #fff;
+    text-align: center;
+}
+.box .inputbox
+{
+    margin: 0 40px;
+    position: relative;
+    padding: 20px 0;
+}
+.box .inputbox input
+{
+    float: right;
+    width: 230px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    font-size: 16px;
+	letter-spacing: 1px;
+	background: transparent;
+    color: #fff;
+}
+.box .inputbox label
+{
+    top:0;
+    left: 0;    
+    color: #fff;
+    font-size: 16px;
+    
+}
+
+.box .inputbox .space
+{
+    letter-spacing: 1em;
+}
+.box .submit
+{
+	background: transparent;
+	border: none;
+	outline:none;
+	color: #fff;
+    background: #03a9f4;
+    margin: 20px 40px;
+	padding: 8px 20px;
+	cursor:pointer;
+    border-radius: 20px;
+    width: 300px;
+}
+.box img {
+    position: absolute;
+    top: 18px;
+    right: 0px;
+    width: 20px;
+}
+.box .submit2
+{
+	background: transparent;
+	border: none;
+	outline:none;
+    color: #999;
+    float: right;
+    font-size: 5px;
+	cursor:pointer;
+}

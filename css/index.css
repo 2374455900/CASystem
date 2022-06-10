@@ -1,0 +1,86 @@
+body{
+    padding: 0;
+    margin: 0;
+    background-image: url("../layout/image/cool-background.png");
+}
+
+header{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 8000px;
+    font-family: Georgia, 'Times New Roman', Times, serif
+}
+
+ul{
+    /* 取消列表前面的原点 */
+    list-style-type: none;
+
+}
+
+.login_regist{
+    text-align: center;
+    margin-left: 425px;
+    margin-top: 100px;
+}
+
+.login_regist ul li a{
+    /* 取消下划线 */
+    text-decoration: none;
+    color: black;
+}
+
+#login{
+
+}
+
+/* This was made with GlassGenerator.netlify.app */
+
+.glass-container{
+
+
+    width: 700px;
+    height: 375px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: 54px;
+    backdrop-filter: blur(4px);
+    background-color: rgba(189,242,125, 0.122);
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px;
+    border: 0px rgba(255,255,255,0.4) solid;
+    border-bottom: 0px rgba(40,40,40,0.35) solid;
+    border-right: 0px rgba(40,40,40,0.35) solid;
+}
+
+footer{
+    margin-top: 180px;
+}
+
+.container {
+    /* Content is centered horizontally */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.container__column {
+    text-align: center;
+    /* Content is centered vertically */
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* Make all columns have the same width */
+    flex: 1;
+
+    /* OPTIONAL: Space between columns */
+    margin: 0 8px;
+
+    /* OPTIONAL: Border */
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
