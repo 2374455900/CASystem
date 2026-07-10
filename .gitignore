@@ -1,0 +1,41 @@
+# Build outputs
+target/
+backend/target/
+frontend/dist/
+frontend/node_modules/
+
+# IDE configs
+.idea/
+.lingma/
+.trae/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Certificate/key files (binary, may be sensitive)
+*.key
+*.pem
+*.p12
+*.pfx
+*.cer
+*.mycer
+*.crl
+*.crt
+
+# Generated downloads
+backend/downloads/
+
+# Environment config (contains secrets)
+.env
+!.env.example
+
+# Uploaded files
+src/main/webapp/upload/
+
+# Large binary artifacts
+*.zip
+*.exe
+*.jar

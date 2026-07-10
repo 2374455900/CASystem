@@ -1,0 +1,288 @@
+/* ============================================
+   CA证书管理系统 - 全局样式
+   风格：专业严谨 + 现代简洁 + 亮色主题
+   配色方案：专业蓝调（符合CA系统特性）
+   ============================================ */
+
+/* CSS 变量定义 - 专业蓝调配色 */
+:root {
+  /* 主色调 - 专业蓝色 */
+  --ca-primary: #2563eb;
+  --ca-primary-light: #3b82f6;
+  --ca-primary-dark: #1d4ed8;
+  --ca-primary-dim: #1e40af;
+  
+  /* 辅助色 - 安全绿色 */
+  --ca-success: #059669;
+  --ca-success-light: #10b981;
+  --ca-success-dark: #047857;
+  
+  /* 警告色 - 橙色 */
+  --ca-warning: #d97706;
+  --ca-warning-light: #f59e0b;
+  --ca-warning-dark: #b45309;
+  
+  /* 错误色 - 红色 */
+  --ca-error: #dc2626;
+  --ca-error-light: #ef4444;
+  --ca-error-dark: #b91c1c;
+  
+  /* 信息色 - 青色 */
+  --ca-info: #0891b2;
+  --ca-info-light: #06b6d4;
+  --ca-info-dark: #0e7490;
+  
+  /* 渐变色 */
+  --ca-gradient-primary: linear-gradient(135deg, var(--ca-primary) 0%, var(--ca-primary-dark) 100%);
+  --ca-gradient-secondary: linear-gradient(135deg, var(--ca-success) 0%, var(--ca-success-dark) 100%);
+  --ca-gradient-warning: linear-gradient(135deg, var(--ca-warning) 0%, var(--ca-warning-dark) 100%);
+  --ca-gradient-error: linear-gradient(135deg, var(--ca-error) 0%, var(--ca-error-dark) 100%);
+  --ca-gradient-accent: linear-gradient(135deg, var(--ca-info) 0%, var(--ca-info-dark) 100%);
+  
+  /* 背景色 */
+  --ca-bg-primary: #ffffff;
+  --ca-bg-secondary: #f8fafc;
+  --ca-bg-tertiary: #f1f5f9;
+  --ca-bg-card: #ffffff;
+  --ca-bg-hover: #f1f5f9;
+  
+  /* 文字色 */
+  --ca-text-primary: #0f172a;
+  --ca-text-secondary: #334155;
+  --ca-text-tertiary: #64748b;
+  --ca-text-muted: #94a3b8;
+  --ca-text-inverse: #ffffff;
+  
+  /* 边框 */
+  --ca-border: #e2e8f0;
+  --ca-border-hover: #cbd5e1;
+  --ca-border-focus: #2563eb;
+  --ca-border-dashed: #94a3b8;
+  
+  /* 阴影 */
+  --ca-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --ca-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --ca-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --ca-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  
+  /* 圆角 */
+  --ca-radius-sm: 4px;
+  --ca-radius-md: 8px;
+  --ca-radius-lg: 12px;
+  --ca-radius-xl: 16px;
+  --ca-radius-2xl: 24px;
+  --ca-radius-full: 9999px;
+  
+  /* 间距 */
+  --ca-space-xs: 4px;
+  --ca-space-sm: 8px;
+  --ca-space-md: 16px;
+  --ca-space-lg: 24px;
+  --ca-space-xl: 32px;
+  --ca-space-2xl: 48px;
+  
+  /* 字体 */
+  --ca-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --ca-font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --ca-font-heading: 'Inter', sans-serif;
+  
+  /* 过渡 */
+  --ca-transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --ca-transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --ca-transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   全局样式重置
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--ca-font-family);
+  background-color: var(--ca-bg-secondary);
+  color: var(--ca-text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#app {
+  min-height: 100vh;
+  background: var(--ca-bg-primary);
+}
+
+a {
+  text-decoration: none;
+  color: var(--ca-primary);
+  transition: all var(--ca-transition-fast);
+}
+
+a:hover {
+  color: var(--ca-primary-dark);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--ca-transition-fast);
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* ============================================
+   组件样式
+   ============================================ */
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--ca-text-tertiary);
+}
+
+.error-message {
+  color: var(--ca-error);
+  font-size: 14px;
+  margin-top: var(--ca-space-sm);
+  text-align: center;
+  font-weight: 500;
+}
+
+.success-message {
+  color: var(--ca-success);
+  font-size: 14px;
+  margin-top: var(--ca-space-sm);
+  text-align: center;
+  font-weight: 500;
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--ca-space-xl);
+}
+
+.card {
+  background: var(--ca-bg-card);
+  border-radius: var(--ca-radius-xl);
+  box-shadow: var(--ca-shadow-md);
+  padding: var(--ca-space-2xl);
+  margin-bottom: var(--ca-space-2xl);
+  border: 1px solid var(--ca-border);
+  transition: all var(--ca-transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--ca-shadow-xl);
+  transform: translateY(-2px);
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: var(--ca-radius-md);
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all var(--ca-transition-fast);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ca-shadow-md);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background: var(--ca-gradient-primary);
+  color: white;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+  transform: translateY(-3px);
+}
+
+.btn-secondary {
+  background: var(--ca-bg-secondary);
+  color: var(--ca-text-secondary);
+  border: 1px solid var(--ca-border);
+}
+
+.btn-secondary:hover {
+  background: var(--ca-bg-hover);
+  border-color: var(--ca-border-hover);
+  color: var(--ca-primary);
+}
+
+.btn-danger {
+  background: var(--ca-gradient-error);
+  color: white;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+}
+
+.btn-danger:hover {
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5);
+  transform: translateY(-3px);
+}
+
+/* ============================================
+   动画定义
+   ============================================ */
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(-100%);
+}
+
+/* ============================================
+   响应式断点
+   ============================================ */
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: var(--ca-space-md);
+  }
+  
+  .card {
+    padding: var(--ca-space-xl);
+    margin-bottom: var(--ca-space-xl);
+  }
+}

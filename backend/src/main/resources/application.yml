@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: ca-system
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/schedule_system?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=utf8
+    username: root
+    password:
+    druid:
+      initial-size: 5
+      max-active: 10
+      max-wait: 1000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: 8088
+
+app:
+  certificate:
+    key-directory: ${KEY_DIRECTORY:./keys}
+    download-path: ${CERTIFICATE_DOWNLOAD_PATH:./downloads}
+  mail:
+    enabled: ${MAIL_ENABLED:false}
+    from: ${MAIL_FROM:noreply@casystem.com}
+    smtp-host: ${MAIL_SMTP_HOST:smtp.qq.com}
+    smtp-port: ${MAIL_SMTP_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+  reminder:
+    days-before-expiry: ${REMINDER_DAYS:30,15,7}
+
+logging:
+  level:
+    root: INFO
+    com.kuugae: DEBUG

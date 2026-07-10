@@ -1,0 +1,181 @@
+version: '3.8'
+
+services:
+  # MySQL数据库服务
+  mysql:
+    image: mysql:8.0
+    container_name: ca-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root123}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-ca_system}
+      MYSQL_USER: ${MYSQL_USER:-ca_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-ca_pass123}
+      TZ: Asia/Shanghai
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/src/main/resources/db/migration:/docker-entrypoint-initdb.d
+    command: >
+      --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root123}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - ca-network
+
+  # 后端服务
+  backend:
+    build:
+      context: .
+      dockerfile_inline: |
+        # CA System Backend Dockerfile
+        # 阶段1: 构建阶段
+        FROM maven:3.9-eclipse-temurin-17-alpine AS builder
+        WORKDIR /app
+        # 先复制pom.xml下载依赖（利用Docker缓存）
+        COPY backend/pom.xml .
+        RUN mvn dependency:go-offline -B
+        # 复制源代码并构建
+        COPY backend/src ./src
+        RUN mvn clean package -DskipTests -B
+        # 阶段2: 运行阶段
+        FROM eclipse-temurin:17-jre-alpine
+        RUN apk add --no-cache curl tzdata
+        ENV TZ=Asia/Shanghai
+        WORKDIR /app
+        COPY --from=builder /app/target/ca-system.jar app.jar
+        RUN mkdir -p /app/keys /app/downloads /app/logs
+        EXPOSE 8088
+        HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3 \
+            CMD curl -f http://localhost:8088/actuator/health || exit 1
+        ENTRYPOINT ["java", "-jar", "app.jar"]
+    container_name: ca-backend
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-ca_system}?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&characterEncoding=utf8
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER:-ca_user}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD:-ca_pass123}
+      SERVER_PORT: 8088
+      KEY_DIRECTORY: /app/keys
+      CERTIFICATE_DOWNLOAD_PATH: /app/downloads
+      MAIL_ENABLED: ${MAIL_ENABLED:-false}
+      MAIL_FROM: ${MAIL_FROM:-noreply@casystem.com}
+      MAIL_SMTP_HOST: ${MAIL_SMTP_HOST:-smtp.qq.com}
+      MAIL_SMTP_PORT: ${MAIL_SMTP_PORT:-587}
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      REMINDER_DAYS: ${REMINDER_DAYS:-30,15,7}
+      JAVA_OPTS: "-Xms512m -Xmx1024m -XX:+UseG1GC"
+      TZ: Asia/Shanghai
+    ports:
+      - "${BACKEND_PORT:-8088}:8088"
+    volumes:
+      - ca_keys:/app/keys
+      - ca_downloads:/app/downloads
+      - ca_logs:/app/logs
+    networks:
+      - ca-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8088/actuator/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 60s
+
+  # 前端服务
+  frontend:
+    build:
+      context: .
+      dockerfile_inline: |
+        # CA System Frontend Dockerfile
+        # 阶段1: 构建阶段
+        FROM node:20-alpine AS builder
+        WORKDIR /app
+        COPY frontend/package*.json ./
+        RUN npm ci
+        COPY frontend/ .
+        RUN npm run build
+        # 阶段2: 运行阶段
+        FROM nginx:alpine
+        RUN apk add --no-cache curl
+        # 创建Nginx配置
+        RUN echo 'server { \
+            listen 80; \
+            server_name localhost; \
+            root /usr/share/nginx/html; \
+            index index.html; \
+            gzip on; \
+            gzip_vary on; \
+            gzip_min_length 1024; \
+            gzip_types text/plain text/css text/xml text/javascript application/javascript application/xml+rss application/json; \
+            location / { \
+                try_files $uri $uri/ /index.html; \
+            } \
+            location /api/ { \
+                proxy_pass http://backend:8088/api/; \
+                proxy_http_version 1.1; \
+                proxy_set_header Upgrade $http_upgrade; \
+                proxy_set_header Connection "upgrade"; \
+                proxy_set_header Host $host; \
+                proxy_set_header X-Real-IP $remote_addr; \
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; \
+                proxy_set_header X-Forwarded-Proto $scheme; \
+                proxy_cache_bypass $http_upgrade; \
+                proxy_read_timeout 86400; \
+            } \
+            location ~* \\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ { \
+                expires 1y; \
+                add_header Cache-Control "public, immutable"; \
+            } \
+            error_page 500 502 503 504 /50x.html; \
+            location = /50x.html { \
+                root /usr/share/nginx/html; \
+            } \
+        }' > /etc/nginx/conf.d/default.conf
+        COPY --from=builder /app/dist /usr/share/nginx/html
+        EXPOSE 80
+        HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+            CMD curl -f http://localhost || exit 1
+        CMD ["nginx", "-g", "daemon off;"]
+    container_name: ca-frontend
+    restart: always
+    depends_on:
+      - backend
+    environment:
+      VITE_API_BASE_URL: http://backend:8088
+    ports:
+      - "${FRONTEND_PORT:-80}:80"
+    networks:
+      - ca-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+# 数据卷
+volumes:
+  mysql_data:
+    driver: local
+  ca_keys:
+    driver: local
+  ca_downloads:
+    driver: local
+  ca_logs:
+    driver: local
+
+# 网络
+networks:
+  ca-network:
+    driver: bridge
