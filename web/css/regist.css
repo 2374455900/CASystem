@@ -1,0 +1,99 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    background: url(../layout/image/login_regist/02.jpg);
+}
+.Box
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 500px;
+    padding: 20px 30px;
+    background: rgba(0,0,0,.2);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.5);
+    border-radius: 10px;
+}
+.Box h1
+{
+    margin:10px 0;
+    color: #fff;
+    text-align: center;
+}
+.p{
+    color: red;
+    margin-left: 10px;
+  }
+.Box .inputbox
+{
+    padding: 10px 0;
+}
+.Box .inputbox label
+{
+    top:0;
+    left: 0;    
+    color: #fff;
+    font-size: 16px;
+    
+}
+.Box .inputbox input
+{
+    /* float: right; */
+    width: 200px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    font-size: 16px;
+	letter-spacing: 1px;
+	background: transparent;
+    color: #fff;
+}
+.Box .xieyi
+{
+    margin: 20px 85px;
+}
+.wenzi
+{
+    color: #fff;
+}
+.submit
+{
+    border-radius: 7px;
+    margin: 10px 150px;
+    height: 40px;
+    width: 150px;
+    background-color: #999;
+    border: none;
+    padding: 0;
+    color: #FFF;
+    font-weight: bold;
+    cursor: default;
+}
+a{
+      bottom: 20px;
+      left: 20px;
+      color:  #03a9f4;
+      text-decoration:none;
+}
+a:hover{
+    color: #ff8500;
+}
+.message {
+    display: inline-block;
+    font-size: 12px;
+    color: #fff;
+    background: url(../layout/image/login_regist/mess.png) no-repeat left center;
+    padding-left: 20px;
+}
+.wrong {
+    color: red;
+    background-image: url(../layout/image/login_regist/wrong.png);
+}
+
+.correct {
+    color: green;
+    background-image: url(../layout/image/login_regist/right.png);
+}
