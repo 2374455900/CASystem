@@ -310,7 +310,7 @@ export default {
 <style scoped>
 .home-page {
     min-height: 100vh;
-    background: var(--color-bg-primary);
+    background: var(--ca-bg-primary);
     position: relative;
     overflow-x: hidden;
 }
@@ -322,9 +322,9 @@ export default {
     pointer-events: none;
     z-index: 0;
     background: 
-        radial-gradient(circle at 20% 20%, var(--color-primary, #0369A1) 0.02% 40%, transparent 40%),
-        radial-gradient(circle at 80% 80%, var(--color-accent-start, #8b5cf6) 0.01% 40%, transparent 40%),
-        radial-gradient(circle at 50% 50%, var(--color-warning) 0.01% 50%, transparent 50%);
+        radial-gradient(circle at 20% 20%, var(--ca-primary, #0369A1) 0.02% 40%, transparent 40%),
+        radial-gradient(circle at 80% 80%, var(--ca-accent-start, #8b5cf6) 0.01% 40%, transparent 40%),
+        radial-gradient(circle at 50% 50%, var(--ca-warning) 0.01% 50%, transparent 50%);
     background-attachment: fixed;
 }
 
@@ -351,7 +351,7 @@ export default {
     border-radius: 20px;
     padding: 40px;
     margin-bottom: 32px;
-    color: var(--color-text-inverse);
+    color: var(--ca-text-inverse);
     box-shadow: var(--shadow-xl);
     overflow: hidden;
 }
@@ -439,17 +439,17 @@ export default {
 
 .stat-icon.total {
     background: rgba(255, 255, 255, 0.2);
-    color: var(--color-text-inverse);
+    color: var(--ca-text-inverse);
 }
 
 .stat-icon.active {
     background: rgba(16, 185, 129, 0.3);
-    color: var(--color-text-inverse);
+    color: var(--ca-text-inverse);
 }
 
 .stat-icon.revoked {
     background: rgba(239, 68, 68, 0.3);
-    color: var(--color-text-inverse);
+    color: var(--ca-text-inverse);
 }
 
 .stat-icon svg {
@@ -484,8 +484,8 @@ export default {
 .action-card {
     position: relative;
     padding: 28px;
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
+    background: var(--ca-bg-card);
+    border: 1px solid var(--ca-border);
     border-radius: 16px;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
@@ -506,15 +506,15 @@ export default {
 }
 
 .action-card.primary::before {
-    color: var(--color-primary);
+    color: var(--ca-primary);
 }
 
 .action-card.success::before {
-    color: var(--color-success);
+    color: var(--ca-success);
 }
 
 .action-card.warning::before {
-    color: var(--color-error);
+    color: var(--ca-error);
 }
 
 .action-card:hover::before {
@@ -549,15 +549,15 @@ export default {
 }
 
 .action-card.primary .icon-bg {
-    background: var(--color-primary);
+    background: var(--ca-primary);
 }
 
 .action-card.success .icon-bg {
-    background: var(--color-success);
+    background: var(--ca-success);
 }
 
 .action-card.warning .icon-bg {
-    background: var(--color-error);
+    background: var(--ca-error);
 }
 
 .action-card:hover .icon-bg {
@@ -574,13 +574,13 @@ export default {
 .action-content h3 {
     font-size: 18px;
     font-weight: 600;
-    color: var(--color-text-primary);
+    color: --ca-text-primary;
     margin-bottom: 8px;
 }
 
 .action-content p {
     font-size: 14px;
-    color: var(--color-text-secondary);
+    color: var(--ca-text-secondary);
     line-height: 1.5;
 }
 
@@ -590,7 +590,7 @@ export default {
     right: 28px;
     width: 24px;
     height: 24px;
-    color: var(--color-text-tertiary);
+    color: var(--ca-text-tertiary);
     opacity: 0;
     transform: translateX(-4px);
     transition: all 0.2s ease;
@@ -599,13 +599,13 @@ export default {
 .action-card:hover .action-arrow {
     opacity: 1;
     transform: translateX(0);
-    color: var(--color-primary);
+    color: var(--ca-primary);
 }
 
 .section-title {
     font-size: 22px;
     font-weight: 700;
-    color: var(--color-foreground);
+    color: var(--ca-text-primary);
     margin-bottom: 24px;
     display: flex;
     align-items: center;
@@ -620,7 +620,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text-inverse);
+    color: var(--ca-text-inverse);
     animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.9s both;
     will-change: transform;
 }
@@ -649,7 +649,7 @@ export default {
     align-items: center;
     gap: 6px;
     padding: 8px 14px;
-    color: var(--color-primary);
+    color: var(--ca-primary);
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
@@ -660,8 +660,8 @@ export default {
 }
 
 .view-all:hover {
-    background: var(--color-bg-secondary);
-    color: var(--color-primary-light);
+    background: var(--ca-bg-secondary);
+    color: var(--ca-primary-light);
 }
 
 .view-all svg {
@@ -675,7 +675,7 @@ export default {
 .section-title {
     font-size: 22px;
     font-weight: 700;
-    color: var(--color-foreground);
+    color: var(--ca-text-primary);
     margin-bottom: 24px;
     display: flex;
     align-items: center;
@@ -691,8 +691,8 @@ export default {
 }
 
 .recent-item {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
+    background: var(--ca-bg-card);
+    border: 1px solid var(--ca-border);
     border-radius: 14px;
     padding: 20px;
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -707,7 +707,7 @@ export default {
 .recent-item:nth-child(5) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1.3s both; }
 
 .recent-item:hover {
-    border-color: var(--color-primary-light);
+    border-color: var(--ca-primary-light);
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }
@@ -732,13 +732,13 @@ export default {
 
 .cert-icon.active {
     background: rgba(16, 185, 129, 0.1);
-    color: var(--color-success);
+    color: var(--ca-success);
 }
 
 .cert-icon.revoked,
 .cert-icon.expired {
     background: rgba(239, 68, 68, 0.1);
-    color: var(--color-error);
+    color: var(--ca-error);
 }
 
 .cert-icon svg {
@@ -755,7 +755,7 @@ export default {
 .cert-info h4 {
     font-size: 16px;
     font-weight: 600;
-    color: var(--color-text-primary);
+    color: --ca-text-primary;
     margin-bottom: 6px;
 }
 
@@ -770,7 +770,7 @@ export default {
     align-items: center;
     gap: 6px;
     font-size: 13px;
-    color: var(--color-text-secondary);
+    color: var(--ca-text-secondary);
 }
 
 .meta-item svg {
@@ -791,13 +791,13 @@ export default {
 
 .cert-status.active {
     background: rgba(16, 185, 129, 0.1);
-    color: var(--color-success);
+    color: var(--ca-success);
 }
 
 .cert-status.revoked,
 .cert-status.expired {
     background: rgba(239, 68, 68, 0.1);
-    color: var(--color-error);
+    color: var(--ca-error);
 }
 
 .status-dot {
@@ -819,8 +819,8 @@ export default {
 }
 
 .empty-card {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
+    background: var(--ca-bg-card);
+    border: 1px solid var(--ca-border);
     border-radius: 20px;
     padding: 60px 40px;
     text-align: center;
@@ -830,7 +830,7 @@ export default {
     width: 80px;
     height: 80px;
     margin: 0 auto 24px;
-    color: var(--color-text-tertiary);
+    color: var(--ca-text-tertiary);
 }
 
 .empty-icon svg {
@@ -841,13 +841,13 @@ export default {
 .empty-card h3 {
     font-size: 20px;
     font-weight: 600;
-    color: var(--color-text-primary);
+    color: --ca-text-primary;
     margin-bottom: 8px;
 }
 
 .empty-card p {
     font-size: 15px;
-    color: var(--color-text-secondary);
+    color: var(--ca-text-secondary);
     margin-bottom: 24px;
 }
 
@@ -857,7 +857,7 @@ export default {
     gap: 8px;
     padding: 14px 28px;
     background: var(--gradient-primary);
-    color: var(--color-text-inverse);
+    color: var(--ca-text-inverse);
     border: none;
     border-radius: 12px;
     font-size: 15px;

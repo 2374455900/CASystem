@@ -1,115 +1,7 @@
 <template>
     <div class="profile-page">
-        <!-- 动态背景 -->
-        <div class="bg-effects">
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-            <div class="gradient-orb orb-3"></div>
-            <div class="grid-overlay"></div>
-            <div class="floating-particles">
-                <div v-for="i in 15" :key="i" class="particle" :style="getParticleStyle(i)"></div>
-            </div>
-        </div>
-
-        <!-- 导航栏 -->
-        <nav class="navbar">
-            <div class="nav-brand">
-                <div class="brand-icon">
-                    <svg viewBox="0 0 48 48" fill="none">
-                        <defs>
-                            <linearGradient id="brandGrad" x1="0" y1="0" x2="48" y2="48">
-                                <stop offset="0%" stop-color="#3b82f6" />
-                                <stop offset="100%" stop-color="#8b5cf6" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="8" y="8" width="32" height="32" rx="8" stroke="url(#brandGrad)" stroke-width="2"
-                            fill="none" />
-                        <path d="M16 24L22 30L32 18" stroke="url(#brandGrad)" stroke-width="2.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </div>
-                <span class="brand-text">CA证书管理系统</span>
-            </div>
-
-            <div class="nav-links">
-                <router-link to="/home" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        <polyline points="9 22 9 12 15 12 15 22" />
-                    </svg>
-                    首页
-                </router-link>
-                <router-link to="/apply" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                        <line x1="12" y1="8" x2="12" y2="16" />
-                        <line x1="8" y1="12" x2="16" y2="12" />
-                    </svg>
-                    申请证书
-                </router-link>
-                <router-link to="/certificates" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                        <polyline points="14 2 14 8 20 8" />
-                        <line x1="16" y1="13" x2="8" y2="13" />
-                        <line x1="16" y1="17" x2="8" y2="17" />
-                        <polyline points="10 9 9 9 8 9" />
-                    </svg>
-                    我的证书
-                </router-link>
-                <router-link to="/revoke" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="15" y1="9" x2="9" y2="15" />
-                        <line x1="9" y1="9" x2="15" y2="15" />
-                    </svg>
-                    撤销证书
-                </router-link>
-            <!-- <router-link to="/profile" class="nav-link active">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                    <circle cx="12" cy="7" r="4"/>
-                </svg>
-                个人中心
-                </router-link> -->
-                <router-link to="/keys" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                    </svg>
-                    密钥管理
-                </router-link>
-                <router-link to="/generate-signature" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg>
-                    签名生成
-                </router-link>
-                <router-link to="/verify" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                        <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                    签名验证
-                </router-link>
-            </div>
-
-            <div class="nav-user">
-                <div class="user-avatar" :style="{ background: getAvatarGradient(user?.id) }">
-                    {{ user?.username?.charAt(0).toUpperCase() }}
-                </div>
-                <button class="logout-btn" @click="handleLogout">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                        <polyline points="16 17 21 12 16 7" />
-                        <line x1="21" y1="12" x2="9" y2="12" />
-                    </svg>
-                </button>
-            </div>
-        </nav>
-
         <!-- 主内容 -->
+
         <main class="main-content">
             <!-- 页面头部 -->
             <div class="page-header">
@@ -564,22 +456,7 @@ export default {
             return gradients[(id || 0) % gradients.length]
         },
 
-        getParticleStyle(index) {
-            const positions = [
-                { top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%` },
-            ]
-            const pos = positions[Math.floor(Math.random() * positions.length)]
-            const delay = Math.random() * 20
-            const duration = 15 + Math.random() * 10
-            const size = 2 + Math.random() * 4
-            return {
-                ...pos,
-                width: `${size}px`,
-                height: `${size}px`,
-                animationDelay: `${delay}s`,
-                animationDuration: `${duration}s`
-            }
-        }
+
     }
 }
 </script>
