@@ -1,107 +1,7 @@
 <template>
     <div class="home-page">
-        <!-- 动态背景 -->
-        <div class="bg-effects">
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-            <div class="gradient-orb orb-3"></div>
-            <div class="grid-overlay"></div>
-            <div class="floating-particles">
-                <div v-for="i in 20" :key="i" class="particle" :style="getParticleStyle(i)"></div>
-            </div>
-        </div>
-        <!-- 导航栏 -->
-        <nav class="navbar">
-            <div class="nav-brand">
-                <div class="brand-icon">
-                    <svg viewBox="0 0 48 48" fill="none">
-                        <defs>
-                            <linearGradient id="brandGrad" x1="0" y1="0" x2="48" y2="48">
-                                <stop offset="0%" stop-color="#3b82f6" />
-                                <stop offset="100%" stop-color="#8b5cf6" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="8" y="8" width="32" height="32" rx="8" stroke="url(#brandGrad)" stroke-width="2"
-                            fill="none" />
-                        <path d="M16 24L22 30L32 18" stroke="url(#brandGrad)" stroke-width="2.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </div>
-                <span class="brand-text">CA证书管理系统</span>
-            </div>
-
-            <div class="nav-links">
-                <router-link to="/home" class="nav-link active">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        <polyline points="9 22 9 12 15 12 15 22" />
-                    </svg>
-                    首页
-                </router-link>
-                <router-link to="/apply" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                        <line x1="12" y1="8" x2="12" y2="16" />
-                        <line x1="8" y1="12" x2="16" y2="12" />
-                    </svg>
-                    申请证书
-                </router-link>
-                <router-link to="/certificates" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                        <polyline points="14 2 14 8 20 8" />
-                        <line x1="16" y1="13" x2="8" y2="13" />
-                        <line x1="16" y1="17" x2="8" y2="17" />
-                        <polyline points="10 9 9 9 8 9" />
-                    </svg>
-                    我的证书
-                </router-link>
-                <router-link to="/revoke" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="15" y1="9" x2="9" y2="15" />
-                        <line x1="9" y1="9" x2="15" y2="15" />
-                    </svg>
-                    撤销证书
-                </router-link>
-                <router-link to="/keys" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                    </svg>
-                    密钥管理
-                </router-link>
-                <router-link to="/generate-signature" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                    </svg>
-                    签名生成
-                </router-link>
-                <router-link to="/verify" class="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                        <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                    签名验证
-                </router-link>
-            </div>
-
-            <div class="nav-user">
-                <div class="user-avatar" :style="{ background: getAvatarGradient(user?.id) }" @click="$router.push('/profile')" title="个人中心">
-                    {{ user?.username?.charAt(0).toUpperCase() }}
-                </div>
-                <button class="logout-btn" @click="handleLogout">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                        <polyline points="16 17 21 12 16 7" />
-                        <line x1="21" y1="12" x2="9" y2="12" />
-                    </svg>
-                </button>
-            </div>
-        </nav>
-
         <!-- 主内容 -->
+
         <main class="main-content">
             <!-- 欢迎横幅 -->
             <section class="welcome-banner">
@@ -402,22 +302,7 @@ export default {
             return gradients[(id || 0) % gradients.length]
         },
 
-        getParticleStyle(index) {
-            const positions = [
-                { top: `${Math.random() * 100}%`, left: `${Math.random() * 100}%` },
-            ]
-            const pos = positions[Math.floor(Math.random() * positions.length)]
-            const delay = Math.random() * 20
-            const duration = 15 + Math.random() * 10
-            const size = 2 + Math.random() * 4
-            return {
-                ...pos,
-                width: `${size}px`,
-                height: `${size}px`,
-                animationDelay: `${delay}s`,
-                animationDuration: `${duration}s`
-            }
-        }
+
     }
 }
 </script>
@@ -425,292 +310,49 @@ export default {
 <style scoped>
 .home-page {
     min-height: 100vh;
-    background: #F0F9FF;
+    background: var(--color-bg-primary);
     position: relative;
     overflow-x: hidden;
 }
 
-/* 动态背景 */
-.bg-effects {
+.home-page::before {
+    content: '';
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, var(--color-primary, #0369A1) 0.02% 40%, transparent 40%),
+        radial-gradient(circle at 80% 80%, var(--color-accent-start, #8b5cf6) 0.01% 40%, transparent 40%),
+        radial-gradient(circle at 50% 50%, var(--color-warning) 0.01% 50%, transparent 50%);
+    background-attachment: fixed;
 }
 
-.gradient-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.3;
-    animation: float 20s ease-in-out infinite;
-}
-
-.orb-1 {
-    width: 600px;
-    height: 600px;
-    background: linear-gradient(135deg, #0369A1, #0EA5E9);
-    top: -200px;
-    right: -200px;
-    animation-delay: 0s;
-}
-
-.orb-2 {
-    width: 500px;
-    height: 500px;
-    background: linear-gradient(135deg, #059669, #10b981);
-    bottom: -150px;
-    left: -150px;
-    animation-delay: -7s;
-    animation-direction: reverse;
-}
-
-.orb-3 {
-    width: 400px;
-    height: 400px;
-    background: linear-gradient(135deg, #f59e0b, #ef4444);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation-delay: -14s;
-    opacity: 0.2;
-}
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translate(0, 0) scale(1);
-    }
-
-    33% {
-        transform: translate(30px, -30px) scale(1.1);
-    }
-
-    66% {
-        transform: translate(-20px, 20px) scale(0.9);
+@media (prefers-reduced-motion: reduce) {
+    .home-page::before {
+        background: none;
     }
 }
 
-/* 浮动粒子 */
-.floating-particles {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-}
-
-.particle {
-    position: absolute;
-    background: radial-gradient(circle, rgba(3, 105, 161, 0.4), transparent);
-    border-radius: 50%;
-    animation: particleFloat linear infinite;
-}
-
-@keyframes particleFloat {
-    0% {
-        transform: translateY(0) rotate(0deg);
+@keyframes fadeInUp {
+    from {
         opacity: 0;
+        transform: translateY(24px);
     }
-
-    10% {
+    to {
         opacity: 1;
-    }
-
-    90% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 0;
+        transform: translateY(0);
     }
 }
 
-.grid-overlay {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(3, 105, 161, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(3, 105, 161, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-}
-
-/* 导航栏 */
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
-    height: 70px;
-    background: #ffffff;
-    border-bottom: 1px solid #e2e8f0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.brand-icon {
-    width: 40px;
-    height: 40px;
-}
-
-.brand-icon svg {
-    width: 100%;
-    height: 100%;
-}
-
-.brand-text {
-    font-size: 18px;
-    font-weight: 700;
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    white-space: nowrap;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.nav-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    color: #64748b;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 10px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.nav-link::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.nav-link:hover::before {
-    transform: scaleX(1);
-}
-
-.nav-link svg {
-    width: 18px;
-    height: 18px;
-    transition: transform 0.3s ease;
-    position: relative;
-    z-index: 1;
-}
-
-.nav-link:hover svg {
-    transform: scale(1.2) rotate(5deg);
-}
-
-.nav-link span {
-    position: relative;
-    z-index: 1;
-}
-
-.nav-link:hover {
-    color: #3b82f6;
-}
-
-.nav-link.active {
-    color: #3b82f6;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
-}
-
-.nav-link.active svg {
-    transform: scale(1.1);
-}
-
-.nav-user {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.user-avatar {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.user-avatar:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.logout-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    color: #64748b;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.logout-btn:hover {
-    background: #fef2f2;
-    border-color: #fecaca;
-    color: #ef4444;
-}
-
-.logout-btn svg {
-    width: 18px;
-    height: 18px;
-}
-
-/* 主内容 */
-.main-content {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 32px 20px;
-}
-
-/* 欢迎横幅 */
 .welcome-banner {
     position: relative;
-    background: linear-gradient(135deg, #0369A1 0%, #0EA5E9 100%);
+    background: var(--gradient-primary);
     border-radius: 20px;
     padding: 40px;
     margin-bottom: 32px;
-    color: white;
-    box-shadow: 0 10px 30px -10px rgba(3, 105, 161, 0.3);
+    color: var(--color-text-inverse);
+    box-shadow: var(--shadow-xl);
     overflow: hidden;
 }
 
@@ -734,45 +376,30 @@ export default {
     gap: 32px;
     position: relative;
     z-index: 1;
-}
-
-.welcome-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    backdrop-filter: blur(10px);
-}
-
-.welcome-badge svg {
-    width: 16px;
-    height: 16px;
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+    will-change: transform;
 }
 
 .welcome-text h1 {
     font-size: 32px;
     font-weight: 700;
     margin: 12px 0 8px;
-}
-
-.username {
-    color: #FDE047;
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+    will-change: transform;
 }
 
 .welcome-text p {
     font-size: 15px;
     opacity: 0.95;
+    line-height: 1.6;
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
 }
 
 .welcome-stats {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
 }
 
 .stat-card {
@@ -782,15 +409,21 @@ export default {
     padding: 16px 20px;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 14px;
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
+    will-change: transform, box-shadow;
 }
+
+.stat-card:nth-child(1) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both; }
+.stat-card:nth-child(2) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.55s both; }
+.stat-card:nth-child(3) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both; }
 
 .stat-card:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
 }
 
 .stat-icon {
@@ -800,21 +433,23 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
 }
 
 .stat-icon.total {
     background: rgba(255, 255, 255, 0.2);
-    color: white;
+    color: var(--color-text-inverse);
 }
 
 .stat-icon.active {
-    background: rgba(5, 150, 105, 0.3);
-    color: white;
+    background: rgba(16, 185, 129, 0.3);
+    color: var(--color-text-inverse);
 }
 
 .stat-icon.revoked {
     background: rgba(239, 68, 68, 0.3);
-    color: white;
+    color: var(--color-text-inverse);
 }
 
 .stat-icon svg {
@@ -831,42 +466,13 @@ export default {
 .stat-value {
     font-size: 24px;
     font-weight: 700;
+    animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both;
 }
 
 .stat-label {
     font-size: 13px;
     opacity: 0.9;
-}
-
-/* 快捷操作 */
-.quick-actions {
-    margin-bottom: 32px;
-}
-
-.section-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #0C4A6E;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.title-icon {
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, #0369A1 0%, #0EA5E9 100%);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-}
-
-.title-icon svg {
-    width: 18px;
-    height: 18px;
+    animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.65s both;
 }
 
 .action-grid {
@@ -878,12 +484,13 @@ export default {
 .action-card {
     position: relative;
     padding: 28px;
-    background: #ffffff;
-    border: 1px solid #E0F2FE;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
     border-radius: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     overflow: hidden;
+    will-change: transform, box-shadow, border-color;
 }
 
 .action-card::before {
@@ -895,19 +502,19 @@ export default {
     height: 3px;
     background: linear-gradient(90deg, transparent, currentColor, transparent);
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .action-card.primary::before {
-    color: #0369A1;
+    color: var(--color-primary);
 }
 
 .action-card.success::before {
-    color: #059669;
+    color: var(--color-success);
 }
 
 .action-card.warning::before {
-    color: #DC2626;
+    color: var(--color-error);
 }
 
 .action-card:hover::before {
@@ -916,27 +523,21 @@ export default {
 
 .action-card:hover {
     border-color: transparent;
-    box-shadow: 0 12px 24px -8px rgba(3, 105, 161, 0.15);
-    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
 }
 
-.action-card.primary:hover {
-    box-shadow: 0 12px 24px -8px rgba(3, 105, 161, 0.2);
-}
-
-.action-card.success:hover {
-    box-shadow: 0 12px 24px -8px rgba(5, 150, 105, 0.2);
-}
-
-.action-card.warning:hover {
-    box-shadow: 0 12px 24px -8px rgba(220, 38, 38, 0.2);
-}
+.action-card:nth-child(1) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both; }
+.action-card:nth-child(2) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.85s both; }
+.action-card:nth-child(3) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.9s both; }
 
 .action-icon {
     position: relative;
     width: 56px;
     height: 56px;
     margin-bottom: 20px;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
 }
 
 .icon-bg {
@@ -944,19 +545,19 @@ export default {
     inset: 0;
     border-radius: 12px;
     opacity: 0.1;
-    transition: all 0.3s;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .action-card.primary .icon-bg {
-    background: #0369A1;
+    background: var(--color-primary);
 }
 
 .action-card.success .icon-bg {
-    background: #059669;
+    background: var(--color-success);
 }
 
 .action-card.warning .icon-bg {
-    background: #DC2626;
+    background: var(--color-error);
 }
 
 .action-card:hover .icon-bg {
@@ -970,28 +571,16 @@ export default {
     z-index: 1;
 }
 
-.action-card.primary .action-icon svg {
-    color: #0369A1;
-}
-
-.action-card.success .action-icon svg {
-    color: #059669;
-}
-
-.action-card.warning .action-icon svg {
-    color: #DC2626;
-}
-
 .action-content h3 {
     font-size: 18px;
     font-weight: 600;
-    color: #0C4A6E;
+    color: var(--color-text-primary);
     margin-bottom: 8px;
 }
 
 .action-content p {
     font-size: 14px;
-    color: #64748B;
+    color: var(--color-text-secondary);
     line-height: 1.5;
 }
 
@@ -1001,19 +590,47 @@ export default {
     right: 28px;
     width: 24px;
     height: 24px;
-    color: #94A3B8;
+    color: var(--color-text-tertiary);
     opacity: 0;
     transform: translateX(-4px);
-    transition: all 0.3s;
+    transition: all 0.2s ease;
 }
 
 .action-card:hover .action-arrow {
     opacity: 1;
     transform: translateX(0);
-    color: #0369A1;
+    color: var(--color-primary);
 }
 
-/* 最近证书 */
+.section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-foreground);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.title-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--gradient-primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-inverse);
+    animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.9s both;
+    will-change: transform;
+}
+
+.title-icon svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .recent-section {
     margin-bottom: 32px;
 }
@@ -1023,6 +640,8 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1s both;
+    will-change: transform;
 }
 
 .view-all {
@@ -1030,43 +649,66 @@ export default {
     align-items: center;
     gap: 6px;
     padding: 8px 14px;
-    color: #0369A1;
+    color: var(--color-primary);
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
     border-radius: 8px;
-    transition: all 0.2s;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
+    will-change: transform, background-color, color;
 }
 
 .view-all:hover {
-    background: #F0F9FF;
-    color: #0EA5E9;
+    background: var(--color-bg-secondary);
+    color: var(--color-primary-light);
 }
 
 .view-all svg {
-    width: 16px;
-    height: 16px;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.view-all:hover svg {
+    transform: translateX(2px);
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-foreground);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.9s both;
 }
 
 .recent-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1.05s both;
 }
 
 .recent-item {
-    background: #ffffff;
-    border: 1px solid #E0F2FE;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
     border-radius: 14px;
     padding: 20px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
+    will-change: transform, box-shadow, border-color;
 }
 
+.recent-item:nth-child(1) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1.1s both; }
+.recent-item:nth-child(2) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1.15s both; }
+.recent-item:nth-child(3) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1.2s both; }
+.recent-item:nth-child(4) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1.25s both; }
+.recent-item:nth-child(5) { animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) 1.3s both; }
+
 .recent-item:hover {
-    border-color: #0EA5E9;
-    box-shadow: 0 4px 12px -4px rgba(3, 105, 161, 0.1);
+    border-color: var(--color-primary-light);
+    box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }
 
@@ -1084,22 +726,25 @@ export default {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
 }
 
 .cert-icon.active {
-    background: rgba(5, 150, 105, 0.1);
-    color: #059669;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--color-success);
 }
 
 .cert-icon.revoked,
 .cert-icon.expired {
-    background: rgba(220, 38, 38, 0.1);
-    color: #DC2626;
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--color-error);
 }
 
 .cert-icon svg {
     width: 24px;
     height: 24px;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .cert-info {
@@ -1110,7 +755,7 @@ export default {
 .cert-info h4 {
     font-size: 16px;
     font-weight: 600;
-    color: #0C4A6E;
+    color: var(--color-text-primary);
     margin-bottom: 6px;
 }
 
@@ -1125,7 +770,7 @@ export default {
     align-items: center;
     gap: 6px;
     font-size: 13px;
-    color: #64748B;
+    color: var(--color-text-secondary);
 }
 
 .meta-item svg {
@@ -1145,14 +790,14 @@ export default {
 }
 
 .cert-status.active {
-    background: rgba(5, 150, 105, 0.1);
-    color: #059669;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--color-success);
 }
 
 .cert-status.revoked,
 .cert-status.expired {
-    background: rgba(220, 38, 38, 0.1);
-    color: #DC2626;
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--color-error);
 }
 
 .status-dot {
@@ -1161,27 +806,21 @@ export default {
     border-radius: 50%;
     background: currentColor;
     flex-shrink: 0;
+    animation: statusPulse 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-.cert-status {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
 }
 
-/* 空状态 */
 .empty-section {
     margin-bottom: 32px;
 }
 
 .empty-card {
-    background: #ffffff;
-    border: 1px solid #E0F2FE;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
     border-radius: 20px;
     padding: 60px 40px;
     text-align: center;
@@ -1191,7 +830,7 @@ export default {
     width: 80px;
     height: 80px;
     margin: 0 auto 24px;
-    color: #CBD5E1;
+    color: var(--color-text-tertiary);
 }
 
 .empty-icon svg {
@@ -1202,13 +841,13 @@ export default {
 .empty-card h3 {
     font-size: 20px;
     font-weight: 600;
-    color: #0C4A6E;
+    color: var(--color-text-primary);
     margin-bottom: 8px;
 }
 
 .empty-card p {
     font-size: 15px;
-    color: #64748B;
+    color: var(--color-text-secondary);
     margin-bottom: 24px;
 }
 
@@ -1217,15 +856,16 @@ export default {
     align-items: center;
     gap: 8px;
     padding: 14px 28px;
-    background: linear-gradient(135deg, #0369A1 0%, #0EA5E9 100%);
-    color: white;
+    background: var(--gradient-primary);
+    color: var(--color-text-inverse);
     border: none;
     border-radius: 12px;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 12px rgba(3, 105, 161, 0.2);
+    will-change: transform, box-shadow;
 }
 
 .btn-primary:hover {
@@ -1233,22 +873,18 @@ export default {
     transform: translateY(-2px);
 }
 
+.btn-primary:active {
+    transform: translateY(0);
+    transition: none;
+}
+
 .btn-primary svg {
     width: 20px;
     height: 20px;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 响应式 */
 @media (max-width: 768px) {
-    .navbar {
-        padding: 0 20px;
-        height: 70px;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
     .welcome-banner {
         padding: 24px;
     }
@@ -1282,6 +918,44 @@ export default {
 
     .cert-status {
         align-self: flex-end;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stat-cards-container,
+    .action-grid,
+    .recent-list {
+        display: none;
+    }
+    
+    .action-card,
+    .stat-card,
+    .recent-item,
+    .view-all {
+        transition: none;
+    }
+
+    .action-card:hover,
+    .stat-card:hover,
+    .recent-item:hover,
+    .btn-primary:hover,
+    .view-all:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+    
+    .welcome-content,
+    .welcome-text h1,
+    .welcome-text p,
+    .stat-value,
+    .stat-label,
+    .section-title,
+    .title-icon,
+    .recent-item,
+    .cert-icon,
+    .cert-status,
+    .btn-primary {
+        animation: none !important;
     }
 }
 </style>
